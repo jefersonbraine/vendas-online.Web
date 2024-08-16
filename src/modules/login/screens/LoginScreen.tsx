@@ -4,7 +4,8 @@ import axios from 'axios';
 
 import Button from "../../../shared/buttons/button/Button";
 import Input from "../../../shared/inputs/input/input";
-import { BackgroundImage, ContainerLogin, ContainerLoginScreen, LimitedContainer, LogoImage, TitleLogin } from "../styles/loginScreen.styles";
+import { BackgroundImage, ContainerLogin, ContainerLoginScreen, LimitedContainer, TitleLogin } from "../styles/loginScreen.styles";
+import SVGLogo from "../../../shared/icons/SVGLogo";
 
 const LoginScreen = () => {
     const [email, setEmail] = useState("");
@@ -42,7 +43,7 @@ const LoginScreen = () => {
         <ContainerLoginScreen>
         <ContainerLogin>
             <LimitedContainer>
-                <LogoImage src="./logo.png" />
+                    <SVGLogo/>
                 <TitleLogin level={2} type="secondary">LOGIN</TitleLogin>
                     <Input
                         title="Usuário"
