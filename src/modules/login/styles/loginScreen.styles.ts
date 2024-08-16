@@ -42,7 +42,7 @@ export const ContainerLogin = styled.div`
 export const LimitedContainer = styled.div`
     width: 100%;
     max-width: 498px;
-    
+    flex-direction: column;
     display: flex;
     justify-content: center;
 
