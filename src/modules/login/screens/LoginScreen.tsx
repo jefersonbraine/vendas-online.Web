@@ -2,14 +2,16 @@ import { useState } from "react";
 
 import axios from 'axios';
 
-import Button from "../../../shared/buttons/button/Button";
-import Input from "../../../shared/inputs/input/input";
+import Button from "../../../shared/components/buttons/button/Button";
+import Input from "../../../shared/components/inputs/input/input";
 import { BackgroundImage, ContainerLogin, ContainerLoginScreen, LimitedContainer, TitleLogin } from "../styles/loginScreen.styles";
-import SVGLogo from "../../../shared/icons/SVGLogo";
+import SVGLogo from "../../../shared/components/icons/SVGLogo";
+import { useRequests } from "../../../shared/hooks/useRequests";
 
 const LoginScreen = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const { postRequest, loading } = useRequests();
 
 
     const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,20 +23,9 @@ const LoginScreen = () => {
     };
 
     const handleLogin = async () => {
-        await axios({
-            method: "post",
-            url: "http://localhost:8080/auth",
-            data: {
-                    "email": email,
-                    "password": password,
-                },
-        })
-            .then((result) => {
-                alert(`Fez login ${result.data.accessToken}`);
-                return result.data;
-            })
-            .catch(() => {
-            alert('Login ou senha inválidos');
+        postRequest("http://localhost:8080/auth", {
+            email: email, //entre aspas o nome do campo "email"
+            password: password//entre aspas o nome do campo "password"
         });
         
     }
@@ -57,6 +48,7 @@ const LoginScreen = () => {
                         onChange={handlePassword}
                         value={password} />
                     <Button
+                        loading={loading}
                         type="primary"
                         margin="64px 0px 16px 0px"
                         onClick={handleLogin}>ENTRAR
